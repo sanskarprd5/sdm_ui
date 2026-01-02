@@ -1,0 +1,101 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h1 class="auth-title">Smart Destination Management</h1>
+      <p class="auth-subtitle">Welcome back</p>
+    </div>
+
+    <form #authForm="ngForm" (ngSubmit)="onSubmit($event)" autocomplete="off">
+      
+      <!-- Username Input (Email validation commented for later use) -->
+      <div class="form-group">
+        <label for="username" class="form-label">Username</label>
+        <div class="input-wrapper">
+          <i class="pi pi-user input-icon"></i>
+          <input
+            id="username"
+            type="text"
+            class="form-input"
+            placeholder="Enter your username"
+            name="username"
+            [(ngModel)]="username"
+            required
+            #usernameInput="ngModel"
+            autocomplete="off">
+            <!-- Commented email validation for later use
+            type="email"
+            email
+            -->
+        </div>
+        <div *ngIf="usernameInput.invalid && usernameInput.touched" class="error-message">
+          <span *ngIf="usernameInput.errors?.['required']">Username is required</span>
+          <!-- Commented email validation error for later use
+          <span *ngIf="usernameInput.errors?.['email']">Please enter a valid email</span>
+          -->
+        </div>
+      </div>
+
+      <!-- Password Input -->
+      <div class="form-group">
+        <label for="password" class="form-label">Password</label>
+        <div class="input-wrapper">
+          <i class="pi pi-lock input-icon"></i>
+          <input
+            id="password"
+            [type]="showPassword ? 'text' : 'password'"
+            class="form-input"
+            placeholder="Enter your password"
+            name="password"
+            [(ngModel)]="password"
+            required
+            #passwordInput="ngModel"
+            autocomplete="off">
+          <i 
+            class="pi input-icon-right" 
+            [ngClass]="showPassword ? 'pi-eye-slash' : 'pi-eye'"
+            (click)="togglePassword()"></i>
+        </div>
+        <div *ngIf="passwordInput.invalid && passwordInput.touched" class="error-message">
+          <span *ngIf="passwordInput.errors?.['required']">Password is required</span>
+        </div>
+      </div>
+
+      <!-- Remember Me -->
+      <div class="form-check">
+        <input 
+          type="checkbox" 
+          id="rememberMe" 
+          class="checkbox-input"
+          [(ngModel)]="rememberMe"
+          name="rememberMe">
+        <label for="rememberMe" class="checkbox-label">
+          Keep me signed in
+        </label>
+      </div>
+
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="alert-error">
+        <i class="pi pi-exclamation-triangle"></i>
+        {{ errorMessage }}
+      </div>
+
+      <!-- Success Message -->
+      <div *ngIf="successMessage" class="alert-success">
+        <i class="pi pi-check-circle"></i>
+        {{ successMessage }}
+      </div>
+
+      <!-- Submit Button -->
+      <button 
+        type="submit" 
+        class="submit-button"
+        [disabled]="isLoading || authForm.invalid">
+        <span *ngIf="!isLoading">Sign In</span>
+        <span *ngIf="isLoading" class="loading-spinner">
+          <i class="pi pi-spinner pi-spin"></i>
+          Signing In...
+        </span>
+      </button>
+    </form>
+  </div>
+</div>

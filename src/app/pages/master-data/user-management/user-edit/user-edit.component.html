@@ -1,0 +1,188 @@
+<div class="user-edit-container">
+  <div class="edit-header">
+    <div class="user-info-section">
+      <div class="user-info-item">
+        <span class="info-label">Name:</span>
+        <span class="info-value">{{ user.firstName }} {{ user.lastName }}</span>
+      </div>
+      <div class="user-info-item">
+        <span class="info-label">Email ID:</span>
+        <span class="info-value">{{ user.emailAddress }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="edit-content">
+    <p-tabView [(activeIndex)]="activeTabIndex" styleClass="custom-tabview">
+      <!-- User Type Tab -->
+      <p-tabPanel header="User Type">
+        <div class="tab-content">
+          <h3 class="section-title">Select User Type</h3>
+          
+          <div class="radio-group">
+            <div class="radio-option">
+              <p-radioButton 
+                name="userType" 
+                value="customer" 
+                [(ngModel)]="editUserType" 
+                inputId="customer">
+              </p-radioButton>
+              <label for="customer" class="radio-label">Customer User</label>
+            </div>
+
+            <div class="radio-option">
+              <p-radioButton 
+                name="userType" 
+                value="bdp" 
+                [(ngModel)]="editUserType" 
+                inputId="bdp">
+              </p-radioButton>
+              <label for="bdp" class="radio-label">BDP User</label>
+            </div>
+
+            <div class="radio-option">
+              <p-radioButton 
+                name="userType" 
+                value="analytics" 
+                [(ngModel)]="editUserType" 
+                inputId="analytics">
+              </p-radioButton>
+              <label for="analytics" class="radio-label">Smart Destination Admin</label>
+            </div>
+          </div>
+        </div>
+      </p-tabPanel>
+
+      <!-- Company Assignment Tab -->
+      <p-tabPanel header="Company Assignment">
+        <div class="tab-content">
+          <div class="company-assignment-section">
+            <div class="company-header">
+              <div class="header-left">
+                <input 
+                  type="checkbox" 
+                  class="header-checkbox"
+                  [(ngModel)]="selectAllCompanies"
+                  (change)="onSelectAllCompanies()">
+                <span class="company-name-header">Company Name</span>
+                <span class="sort-icon">↕</span>
+              </div>
+              <div class="search-container">
+                <input 
+                  type="text" 
+                  class="company-search"
+                  placeholder="Search by Company Name"
+                  [(ngModel)]="companySearchText"
+                  (input)="onSearchCompany()">
+              </div>
+            </div>
+
+            <div class="company-list">
+              <div *ngFor="let company of filteredCompanies" class="company-item" [class.expanded]="company.expanded">
+                <div class="company-row" [style.padding-left]="company.level * 20 + 'px'">
+                  <span *ngIf="company.children && company.children.length > 0" 
+                        class="expand-icon" 
+                        (click)="toggleCompany(company)">
+                    {{ company.expanded ? '▼' : '▶' }}
+                  </span>
+                  <span *ngIf="!company.children || company.children.length === 0" class="no-expand-icon"></span>
+                  <input 
+                    type="checkbox" 
+                    class="company-checkbox"
+                    [(ngModel)]="company.selected"
+                    (change)="onCompanySelectionChange()">
+                  <span class="company-name">{{ company.name }}</span>
+                </div>
+                <div *ngIf="company.expanded && company.children" class="company-children">
+                  <div *ngFor="let child of company.children" class="company-item">
+                    <div class="company-row" [style.padding-left]="(company.level + 1) * 20 + 'px'">
+                      <span *ngIf="child.children && child.children.length > 0" 
+                            class="expand-icon" 
+                            (click)="toggleCompany(child)">
+                        {{ child.expanded ? '▼' : '▶' }}
+                      </span>
+                      <span *ngIf="!child.children || child.children.length === 0" class="no-expand-icon"></span>
+                      <input 
+                        type="checkbox" 
+                        class="company-checkbox"
+                        [(ngModel)]="child.selected"
+                        (change)="onCompanySelectionChange()">
+                      <span class="company-name">{{ child.name }}</span>
+                    </div>
+                    <div *ngIf="child.expanded && child.children" class="company-children">
+                      <div *ngFor="let subChild of child.children" class="company-item">
+                        <div class="company-row" [style.padding-left]="(company.level + 2) * 20 + 'px'">
+                          <span class="no-expand-icon"></span>
+                          <input 
+                            type="checkbox" 
+                            class="company-checkbox"
+                            [(ngModel)]="subChild.selected"
+                            (change)="onCompanySelectionChange()">
+                          <span class="company-name">{{ subChild.name }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pagination-section">
+              <span class="pagination-info">Showing 1 to 10 of {{ totalCompanies }} entries</span>
+              <div class="pagination-controls">
+                <button class="page-btn" [disabled]="currentPage === 1" (click)="goToFirstPage()">«</button>
+                <button class="page-btn" [disabled]="currentPage === 1" (click)="previousPage()">‹</button>
+                <button class="page-btn page-number active">{{ currentPage }}</button>
+                <button class="page-btn" [disabled]="currentPage === totalPages" (click)="nextPage()">›</button>
+                <button class="page-btn" [disabled]="currentPage === totalPages" (click)="goToLastPage()">»</button>
+                <select class="page-size-select" [(ngModel)]="pageSize" (change)="onPageSizeChange()">
+                  <option [value]="10">10</option>
+                  <option [value]="25">25</option>
+                  <option [value]="50">50</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+
+  <!-- Success/Error Messages -->
+  <div class="message-container" *ngIf="saveSuccessMessage || saveErrorMessage">
+    <div class="success-message" *ngIf="saveSuccessMessage">
+      <i class="pi pi-check-circle"></i>
+      {{ saveSuccessMessage }}
+    </div>
+    <div class="error-message" *ngIf="saveErrorMessage">
+      <i class="pi pi-exclamation-triangle"></i>
+      {{ saveErrorMessage }}
+    </div>
+  </div>
+
+  <div class="edit-footer">
+    <button 
+      pButton 
+      label="Back" 
+      class="p-button-outlined back-button"
+      (click)="onBack()"
+      [disabled]="activeTabIndex === 0">
+    </button>
+    <div class="right-buttons">
+      <button 
+        pButton 
+        label="Cancel" 
+        class="p-button-outlined cancel-button"
+        (click)="cancelEdit()">
+      </button>
+      <button 
+        pButton 
+        class="continue-button"
+        [disabled]="isSaving"
+        (click)="onContinue()">
+        <i *ngIf="isSaving" class="pi pi-spinner pi-spin" style="margin-right: 0.5rem;"></i>
+        {{ isSaving ? 'Saving...' : (activeTabIndex === 0 ? 'Continue' : 'Save') }}
+      </button>
+    </div>
+  </div>
+</div>

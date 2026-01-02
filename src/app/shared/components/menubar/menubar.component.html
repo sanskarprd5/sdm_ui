@@ -1,0 +1,65 @@
+<nav class="menubar shadow-2 w-full">
+  <button class="hamburger-toggle" (click)="toggleMenu()" [class.open]="isMenuOpen">
+    <i class="pi" [ngClass]="isMenuOpen ? 'pi-times' : 'pi-bars'"></i>
+  </button>
+  
+  <div class="menubar-container flex align-items-center gap-2 px-4 py-1" [class.open]="isMenuOpen">
+    <a routerLink="/arrival" 
+       class="menu-item flex align-items-center gap-2 px-4 py-2 border-round" 
+       [class.active]="isActive('/arrival')"
+       (click)="closeMenu()">
+      <i class="fa-regular fa-location-check"></i>
+      <span class="white-space-nowrap">Arrival</span>
+    </a>
+    <a href="#" 
+       class="menu-item flex align-items-center gap-2 px-4 py-2 border-round" 
+       [class.active]="isActive('/carrier-release')"
+       (click)="closeMenu()">
+      <i>
+        <img src="../../../../assets/images/carrier_release_icon.png" alt="carrier_icon" width="16px" height="16px">
+      </i>
+      <span class="white-space-nowrap">Carrier Release</span>
+    </a>
+    <a href="#" 
+       class="menu-item flex align-items-center gap-2 px-4 py-2 border-round" 
+       [class.active]="isActive('/customs-declaration')"
+       (click)="closeMenu()">
+      <i class="fa-light fa-file-check"></i>
+      <span class="white-space-nowrap">Customs Declaration</span>
+    </a>
+    <a href="#" 
+       class="menu-item flex align-items-center gap-2 px-4 py-2 border-round" 
+       [class.active]="isActive('/delivery')"
+       (click)="closeMenu()">
+      <i class="pi pi-clock"></i>
+      <span class="white-space-nowrap">Delivery</span>
+    </a>
+    <a href="#" 
+       class="menu-item menu-item-dropdown flex align-items-center gap-2 px-4 py-2 border-round" 
+       [class.active]="isActive('/alerts')"
+       (click)="toggleAlertsMenu($event)">
+      <i class="pi pi-exclamation-triangle"></i>
+      <span class="white-space-nowrap">Alerts</span>
+      <i class="pi pi-chevron-down dropdown-icon"></i>
+    </a>
+    <p-menu #alertsMenu [model]="alertsMenuItems" [popup]="true" [appendTo]="'body'" styleClass="alerts-menu"></p-menu>
+    <a href="#" 
+       class="menu-item menu-item-dropdown flex align-items-center gap-2 px-4 py-2 border-round" 
+       [class.active]="isActive('/user-management') || isActive('/master-data')"
+       (click)="toggleMasterDataMenu($event)">
+      <i class="pi pi-database"></i>
+      <span class="white-space-nowrap">Master Data</span>
+      <i class="pi pi-chevron-down dropdown-icon"></i>
+    </a>
+    <p-menu #masterDataMenu [model]="masterDataMenuItems" [popup]="true" [appendTo]="'body'" styleClass="master-data-menu"></p-menu>
+    <a href="#" 
+       class="menu-item flex align-items-center gap-2 px-4 py-2 border-round" 
+       [class.active]="isActive('/exception-manager')"
+       (click)="closeMenu()">
+      <i class="pi pi-clipboard"></i>
+      <span class="white-space-nowrap">Exception Manager</span>
+    </a>
+  </div>
+  
+  <div class="menu-overlay fixed top-0 left-0 w-full h-full hidden" [class.open]="isMenuOpen" (click)="closeMenu()"></div>
+</nav>

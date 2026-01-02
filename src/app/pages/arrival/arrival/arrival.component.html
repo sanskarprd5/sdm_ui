@@ -1,0 +1,161 @@
+<app-main-panel
+  [showFilterButton]="true"
+  [(showFilters)]="showFilters"
+  (onFilterToggle)="onFilterToggle($event)">
+  
+  <app-kpi-widgets 
+    [kpiCards]="kpiCards"
+    [activeCardIndex]="0"
+    (cardSelected)="onKpiSelected($event.kpiId)">
+  </app-kpi-widgets>
+  
+  <div class="shipments-container">
+    <app-common-table
+      [data]="shipments"
+      [columns]="tableHeaders"
+      [loading]="isTableLoading"
+      [paginator]="true"
+      [first]="first"
+      [rows]="pageSize"
+      [rowsPerPageOptions]="[10, 25, 50]"
+      [totalRecords]="totalRecords"
+      [lazy]="false"
+      [selectionMode]="'multiple'"
+      [dataKey]="'shipmentId'"
+      [globalFilterFields]="globalFilterFields"
+      [showCurrentPageReport]="true"
+      [currentPageReportTemplate]="'Showing {first} to {last} of {totalRecords} entries'"
+      [showSearch]="true"
+      [searchPlaceholder]="'Search (min 3 characters)'"
+      [actions]="tableActions"
+      [emptyMessage]="'No shipments found.'"
+      [(searchTerm)]="searchTerm"
+      (pageChange)="onPageChange($event)"
+      (selectionChange)="onSelectionChange($event)"
+      (searchChange)="onSearch()"
+      (sortChange)="onSort($event)"
+      (filterChange)="onFilter($event)">
+      
+      <!-- Custom Body Template -->
+      <ng-template #bodyTemplate let-shipment let-rowIndex="rowIndex">
+        @for (col of tableHeaders; track col.field) {
+          <td style="padding: 1rem 1.25rem; font-size: 0.875rem; color: #1f2937; white-space: nowrap;">
+            @if (col.field === 'missingDocuments' && shipment.missingDocuments) {
+              <div class="missing-docs-cell">
+                <i 
+                  class="pi pi-upload upload-icon" 
+                  title="Upload Documents"
+                  (click)="uploadDocument(shipment)"></i>
+                <a 
+                  [href]="'#'" 
+                  class="shipment-link"
+                  [pTooltip]="getMissingDocsTooltip(shipment)"
+                  tooltipPosition="bottom"
+                  [escape]="false"
+                  (click)="$event.preventDefault(); openMissingDocsDialog(shipment)">
+                  {{ shipment.missingDocuments }}
+                </a>
+              </div>
+            } @else if (col.type === 'link') {
+              <a 
+                [href]="'#'" 
+                class="shipment-link"
+                (click)="$event.preventDefault(); col.field === 'shipmentNo' ? openShipmentConfig(shipment) : null">
+                {{ shipment[col.field] }}
+              </a>
+            } @else {
+              {{ shipment[col.field] }}
+            }
+          </td>
+        }
+      </ng-template>
+    </app-common-table>
+  </div>
+
+<!-- Missing Documents Dialog -->
+<p-dialog 
+  [(visible)]="showMissingDocsDialog" 
+  [modal]="true" 
+  [closable]="true"
+  [dismissableMask]="true"
+  [style]="{width: '35vw', minWidth: '500px', height: '20vw'}"
+  [header]="'Missing Document'"
+  styleClass="missing-docs-dialog-wrapper"
+  (onHide)="closeMissingDocsDialog()">
+  
+  @if (selectedShipmentForDocs) {
+    <div class="missing-docs-dialog">
+      <p-table 
+        [value]="selectedShipmentForDocs.missingDocumentsList || []"
+        styleClass="missing-docs-table">
+        
+        <ng-template #header>
+          <tr>
+            <th>Missing Document</th>
+            <th>Document</th>
+            <th>Action</th>
+          </tr>
+        </ng-template>
+        
+        <ng-template #body let-doc>
+          <tr>
+            <td>{{ doc.name }}</td>
+            <td>
+              <div class="doc-cell">
+                @if (doc.document) {
+                  <a [href]="'#'" class="doc-link">{{ doc.document }}</a>
+                  <i class="pi pi-download action-icon" (click)="downloadDocument(doc)" title="Download"></i>
+                  <i class="pi pi-trash action-icon" (click)="deleteDocument(doc)" title="Delete"></i>
+                } @else {
+                  <span class="no-doc">-</span>
+                }
+              </div>
+            </td>
+            <td class="action-cell">
+              <i class="pi pi-upload action-icon" 
+                [class.disabled]="doc.document" 
+                (click)="!doc.document && uploadDocument(doc)" 
+                [title]="doc.document ? 'Document already uploaded' : 'Upload'"></i>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  }
+</p-dialog>
+
+<!-- Upload Document Dialog -->
+<app-upload-dialog
+  [(visible)]="showUploadDialog"
+  [documentName]="currentDocumentForUpload?.name || ''"
+  [maxFileSize]="5"
+  [allowedFileTypes]="['PDF']"
+  (fileSelected)="handleFileUpload($event)"
+  (cancel)="handleUploadCancel()">
+</app-upload-dialog>
+
+<!-- Alert Configuration Dialog -->
+<app-alert-config-dialog
+  [(visible)]="showAlertConfigDialog"
+  [selectedShipments]="selectedShipments"
+  [useTextFieldForShipments]="true"
+  (save)="onAlertConfigSave($event)"
+  (cancel)="onAlertConfigCancel()">
+</app-alert-config-dialog>
+
+<!-- Toast Notification -->
+<app-toast
+  [message]="toastMessage"
+  [type]="toastType"
+  [show]="showToast"
+  (dismissed)="onToastDismissed()">
+</app-toast>
+
+</app-main-panel>
+
+<!-- Filter Panel -->
+<app-filter-panel
+  [(visible)]="showFilters"
+  (onApply)="applyFilters($event)"
+  (onClear)="clearFilters()">
+</app-filter-panel>

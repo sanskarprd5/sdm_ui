@@ -1,0 +1,286 @@
+<app-main-panel>
+  <div class="shipment-config-page">
+    <div class="page-header">
+      <h1 class="shipment-title">Shipment No: {{ shipmentNo }}</h1>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs-container">
+      <button 
+        type="button"
+        class="tab-btn"
+        [class.active]="activeTab === 'shipment-details'"
+        (click)="setActiveTab('shipment-details')">
+        Shipment Details
+      </button>
+      <button 
+        type="button"
+        class="tab-btn"
+        [class.active]="activeTab === 'cargo-details'"
+        (click)="setActiveTab('cargo-details')">
+        Cargo Details
+      </button>
+      <button 
+        type="button"
+        class="tab-btn"
+        [class.active]="activeTab === 'contact-details'"
+        (click)="setActiveTab('contact-details')">
+        Contact Details
+      </button>
+      <button 
+        type="button"
+        class="tab-btn"
+        [class.active]="activeTab === 'documents'"
+        (click)="setActiveTab('documents')">
+        Documents
+      </button>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="tab-content" *ngIf="activeTab === 'shipment-details'">
+      <!-- Row 1 -->
+      <div class="form-row">
+        <div class="form-field">
+          <label for="shipmentNo">Shipment No.</label>
+          <input 
+            pInputText 
+            id="shipmentNo" 
+            [(ngModel)]="shipmentNo"
+            class="form-input" />
+        </div>
+        <div class="form-field">
+          <label for="modeOfTransport">Mode of Transport</label>
+          <p-dropdown 
+            [(ngModel)]="modeOfTransport"
+            [options]="modeOfTransportOptions"
+            optionLabel="label"
+            optionValue="value"
+            placeholder="Select mode"
+            styleClass="form-dropdown"
+            inputId="modeOfTransport">
+          </p-dropdown>
+        </div>
+        <div class="form-field">
+          <label for="originCountryName">Origin Country Name</label>
+          <input 
+            pInputText 
+            id="originCountryName" 
+            [(ngModel)]="originCountryName"
+            class="form-input" />
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="form-row">
+        <div class="form-field">
+          <label for="originCountryCode">Origin Country Code</label>
+          <input 
+            pInputText 
+            id="originCountryCode" 
+            [(ngModel)]="originCountryCode"
+            class="form-input" />
+        </div>
+        <div class="form-field">
+          <label for="portOfDepartureName">Port of Departure Name</label>
+          <input 
+            pInputText 
+            id="portOfDepartureName" 
+            [(ngModel)]="portOfDepartureName"
+            class="form-input" />
+        </div>
+        <div class="form-field">
+          <label for="portOfDepartureCode">Port of Departure Code</label>
+          <input 
+            pInputText 
+            id="portOfDepartureCode" 
+            [(ngModel)]="portOfDepartureCode"
+            class="form-input" />
+        </div>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="form-row">
+        <div class="form-field">
+          <label for="originRegion">Origin Region</label>
+          <input 
+            pInputText 
+            id="originRegion" 
+            [(ngModel)]="originRegion"
+            class="form-input" />
+        </div>
+        <div class="form-field">
+          <label for="portOfDepartureEstimatedDate">Port of Departure Estimated Date</label>
+          <p-calendar 
+            [(ngModel)]="portOfDepartureEstimatedDate"
+            [showIcon]="true"
+            dateFormat="yy-mm-dd"
+            placeholder="Select date"
+            styleClass="form-calendar"
+            inputId="portOfDepartureEstimatedDate">
+          </p-calendar>
+        </div>
+        <div class="form-field">
+          <label for="portOfDepartureActualDate">Port of Departure Actual Date</label>
+          <p-calendar 
+            [(ngModel)]="portOfDepartureActualDate"
+            [showIcon]="true"
+            dateFormat="yy-mm-dd"
+            placeholder="Select date"
+            styleClass="form-calendar"
+            inputId="portOfDepartureActualDate">
+          </p-calendar>
+        </div>
+      </div>
+
+      <!-- Row 4 -->
+      <div class="form-row">
+        <div class="form-field">
+          <label for="destinationCountryName">Destination Country Name</label>
+          <input 
+            pInputText 
+            id="destinationCountryName" 
+            [(ngModel)]="destinationCountryName"
+            class="form-input" />
+        </div>
+        <div class="form-field">
+          <label for="destinationCountryCode">Destination Country Code</label>
+          <input 
+            pInputText 
+            id="destinationCountryCode" 
+            [(ngModel)]="destinationCountryCode"
+            class="form-input" />
+        </div>
+        <div class="form-field">
+          <label for="portOfArrivalName">Port of Arrival Name</label>
+          <input 
+            pInputText 
+            id="portOfArrivalName" 
+            [(ngModel)]="portOfArrivalName"
+            class="form-input" />
+        </div>
+      </div>
+
+      <!-- Row 5 -->
+      <div class="form-row">
+        <div class="form-field">
+          <label for="portOfArrivalCode">Port of Arrival Code</label>
+          <input 
+            pInputText 
+            id="portOfArrivalCode" 
+            [(ngModel)]="portOfArrivalCode"
+            class="form-input" />
+        </div>
+        <div class="form-field">
+          <label for="destinationRegion">Destination Region</label>
+          <input 
+            pInputText 
+            id="destinationRegion" 
+            [(ngModel)]="destinationRegion"
+            class="form-input" />
+        </div>
+        <div class="form-field">
+          <label for="portOfArrivalEstimatedDate">Port of Arrival Estimated Date</label>
+          <p-calendar 
+            [(ngModel)]="portOfArrivalEstimatedDate"
+            [showIcon]="true"
+            dateFormat="yy-mm-dd"
+            placeholder="Select date"
+            styleClass="form-calendar"
+            inputId="portOfArrivalEstimatedDate">
+          </p-calendar>
+        </div>
+      </div>
+
+      <!-- Row 6 -->
+      <div class="form-row">
+        <div class="form-field">
+          <label for="portOfArrivalActualDate">Port of Arrival Actual Date</label>
+          <p-calendar 
+            [(ngModel)]="portOfArrivalActualDate"
+            [showIcon]="true"
+            dateFormat="yy-mm-dd"
+            placeholder="Select date"
+            styleClass="form-calendar"
+            inputId="portOfArrivalActualDate">
+          </p-calendar>
+        </div>
+        <div class="form-field">
+          <label for="latestEta">Latest ETA</label>
+          <p-calendar 
+            [(ngModel)]="latestEta"
+            [showIcon]="true"
+            dateFormat="yy-mm-dd"
+            placeholder="Select date"
+            styleClass="form-calendar"
+            inputId="latestEta">
+          </p-calendar>
+        </div>
+        <div class="form-field">
+          <label for="status">Status</label>
+          <p-dropdown 
+            [(ngModel)]="status"
+            [options]="statusOptions"
+            optionLabel="label"
+            optionValue="value"
+            placeholder="Select status"
+            styleClass="form-dropdown"
+            inputId="status">
+          </p-dropdown>
+        </div>
+      </div>
+
+      <!-- Row 7 -->
+      <div class="form-row">
+        <div class="form-field">
+          <label for="typeOfService">Type of Service</label>
+          <p-dropdown 
+            [(ngModel)]="typeOfService"
+            [options]="typeOfServiceOptions"
+            optionLabel="label"
+            optionValue="value"
+            placeholder="Select type"
+            styleClass="form-dropdown"
+            inputId="typeOfService">
+          </p-dropdown>
+        </div>
+        <div class="form-field">
+          <label for="vesselName">Vessel Name</label>
+          <input 
+            pInputText 
+            id="vesselName" 
+            [(ngModel)]="vesselName"
+            class="form-input" />
+        </div>
+        <div class="form-field">
+          <label for="vesselCode">Vessel Code</label>
+          <input 
+            pInputText 
+            id="vesselCode" 
+            [(ngModel)]="vesselCode"
+            class="form-input" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Placeholder for other tabs -->
+    <div class="tab-content" *ngIf="activeTab !== 'shipment-details'">
+      <div class="placeholder-message">
+        <p>{{ activeTab }} content coming soon...</p>
+      </div>
+    </div>
+
+    <!-- Footer Actions -->
+    <div class="page-footer">
+      <p-button 
+        label="Cancel" 
+        (onClick)="onCancel()" 
+        styleClass="p-button-outlined cancel-btn">
+      </p-button>
+      <p-button 
+        label="Save" 
+        (onClick)="onSave()" 
+        styleClass="p-button-primary save-btn">
+      </p-button>
+    </div>
+  </div>
+</app-main-panel>

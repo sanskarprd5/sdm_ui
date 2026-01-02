@@ -1,0 +1,107 @@
+<app-main-panel>
+<div class="alerts-page">
+  <div class="alerts-card">
+    <div class="card-header">
+      <div class="title-block">
+        <h1>Arrival</h1>
+      </div>
+      <button pButton label="Add Alert" class="add-alert-btn" (click)="addAlert()"></button>
+    </div>
+
+    <div class="search-section">
+      <i class="pi pi-search search-icon"></i>
+      <input 
+        pInputText
+        type="text"
+        placeholder="Search"
+        [(ngModel)]="searchTerm"
+        (input)="onSearch()"
+      />
+    </div>
+
+    <div class="tabs">
+      <button 
+        *ngFor="let tab of tabs"
+        type="button"
+        class="tab-button"
+        [class.active]="activeTabId === tab.id"
+        (click)="setActiveTab(tab.id)">
+        {{ tab.label }}
+      </button>
+    </div>
+
+    <div 
+      class="table-container" 
+      [ngClass]="{
+        'shipments-scroll': activeTabId === 'shipments'
+      }">
+      <p-table
+        [value]="tableData"
+        [rowHover]="true"
+        [paginator]="false"
+        styleClass="alerts-table"
+        [ngClass]="{'shipments-table': activeTabId === 'shipments'}"
+        [scrollable]="true"
+        scrollDirection="horizontal"
+        responsiveLayout="scroll">
+
+        <ng-template pTemplate="header">
+          <tr>
+            <th *ngFor="let col of tableColumns">
+              <div class="header-cell">
+                <span>{{ col.header }}</span>
+                <span class="header-icons">
+                  <i *ngIf="col.sortable" class="pi pi-sort-alt"></i>
+                  <i *ngIf="col.filterable" class="pi pi-filter"></i>
+                </span>
+              </div>
+            </th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-row>
+          <tr>
+            <td *ngFor="let col of tableColumns">
+              <ng-container [ngSwitch]="col.type">
+                <button 
+                  *ngSwitchCase="'action'" 
+                  type="button" 
+                  class="action-btn"
+                  (click)="onEditRow(row)">
+                  <i class="pi pi-pencil"></i>
+                </button>
+                <span *ngSwitchCase="'status'" class="status-chip" [ngClass]="getStatusClass(row['status'])">
+                  {{ row[col.field] }}
+                </span>
+                <span *ngSwitchCase="'boolean'" class="boolean-text" [class.active]="row[col.field] === 'Yes'">
+                  {{ row[col.field] }}
+                </span>
+                <span *ngSwitchDefault>
+                  {{ row[col.field] }}
+                </span>
+              </ng-container>
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td [attr.colspan]="tableColumns.length" class="text-center">
+              No records found.
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+
+  <app-alert-config-dialog
+    [(visible)]="showAlertConfigDialog"
+    [selectedShipments]="dialogShipmentsSource"
+    [initialConfig]="dialogInitialConfig"
+    [autoSelectShipments]="dialogAutoSelectShipments"
+    (save)="onAlertConfigSave($event)"
+    (cancel)="onAlertConfigCancel()">
+  </app-alert-config-dialog>
+</div>
+</app-main-panel>

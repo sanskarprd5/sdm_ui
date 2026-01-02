@@ -1,0 +1,7 @@
+@if (show) {
+  <div class="toast-notification" [ngClass]="'toast-' + type">
+    <i [class]="getIcon()"></i>
+    <span class="toast-message">{{ message }}</span>
+    <i class="pi pi-times toast-close" (click)="close()"></i>
+  </div>
+}

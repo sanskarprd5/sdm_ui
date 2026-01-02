@@ -1,0 +1,24 @@
+<div class="app-container">
+  <app-topbar></app-topbar>
+  <app-menubar></app-menubar>
+  
+  <div class="breadcrumb-filter-wrapper">
+    <app-breadcrumb></app-breadcrumb>
+    @if (showFilterButton) {
+      <div class="filter-button-container">
+        <app-filter-button
+          [label]="'Show Filters'"
+          [icon]="'pi pi-filter'"
+          [(showFilters)]="showFilters"
+          (onToggle)="handleFilterToggle($event)">
+        </app-filter-button>
+      </div>
+    }
+  </div>
+  
+  <main class="main-content">
+    <ng-content></ng-content>
+  </main>
+  
+  <app-footer></app-footer>
+</div>

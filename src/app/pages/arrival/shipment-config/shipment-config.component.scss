@@ -1,0 +1,290 @@
+.shipment-config-page {
+   width: 95%;
+  height: 95%;
+  margin: auto;
+  padding: 1.5rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  margin-top: 2rem;
+}
+
+.page-header {
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 1.5rem;
+
+  .shipment-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0;
+  }
+}
+
+.tabs-container {
+  display: flex;
+  gap: 0;
+  background-color: #e2edf6;
+  border-bottom: 2px solid #e5e7eb;
+  padding: 0;
+  margin-bottom: 1.5rem;
+
+  .tab-btn {
+    padding: 1rem 1.5rem;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: #6b7280;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    margin-bottom: -2px;
+
+    &:hover {
+      color: #374151;
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    &.active {
+      color: #2d74ff;
+      border-bottom-color: #2d74ff;
+    }
+  }
+}
+
+.tab-content {
+  padding: 0;
+  background-color: #ffffff;
+
+  .placeholder-message {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #6b7280;
+    font-size: 1rem;
+  }
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.25rem;
+  }
+
+  .form-input {
+    width: 100%;
+    height: 2.75rem;
+    padding: 0.625rem 0.875rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    color: #1f2937;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: #9ca3af;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: #2d74ff;
+      box-shadow: 0 0 0 3px rgba(45, 116, 255, 0.1);
+    }
+
+    &::placeholder {
+      color: #9ca3af;
+    }
+  }
+}
+
+// ::ng-deep .form-dropdown,
+// ::ng-deep .form-calendar {
+//   width: 100%;
+
+//   .p-dropdown,
+//   .p-inputtext {
+//     width: 100%;
+//     height: 2.75rem;
+//     border: 1px solid #d1d5db;
+//     border-radius: 6px;
+//     font-size: 0.875rem;
+//     transition: all 0.2s ease;
+
+//     &:hover {
+//       border-color: #9ca3af;
+//     }
+
+//     &:focus,
+//     &.p-focus {
+//       outline: none;
+//       border-color: #2d74ff;
+//       box-shadow: 0 0 0 3px rgba(45, 116, 255, 0.1);
+//     }
+//   }
+
+//   .p-dropdown-label {
+//     padding: 0.625rem 0.875rem;
+//     color: #1f2937;
+
+//     &.p-placeholder {
+//       color: #9ca3af;
+//     }
+//   }
+
+//   .p-dropdown-trigger {
+//     width: 2.75rem;
+//     color: #6b7280;
+//   }
+
+//   .p-calendar {
+//     width: 100%;
+//   }
+
+//   .p-inputtext {
+//     padding-left: 0.875rem;
+//     padding-right: 2.75rem;
+//   }
+
+//   .p-datepicker-trigger {
+//     width: 2.75rem;
+//     color: #6b7280;
+//   }
+// }
+
+.page-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  margin-top: 2rem;
+  border-top: 1px solid #e5e7eb;
+
+  ::ng-deep .p-button {
+    height: 2.75rem;
+    padding: 0.625rem 1.5rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+
+    &.cancel-btn {
+      background-color: #ffffff;
+      border: 1px solid #d1d5db;
+      color: #374151;
+
+      &:hover {
+        background-color: #f9fafb;
+        border-color: #9ca3af;
+      }
+    }
+
+    &.save-btn {
+      background-color: #2d74ff;
+      border: 1px solid #2d74ff;
+      color: #ffffff;
+
+      &:hover {
+        background-color: #1e5fd9;
+        border-color: #1e5fd9;
+      }
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 992px) {
+  .shipment-config-page {
+    padding: 1.25rem;
+  }
+
+  .form-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  .tabs-container {
+    .tab-btn {
+      padding: 0.875rem 1.25rem;
+      font-size: 0.875rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .shipment-config-page {
+    padding: 1rem;
+  }
+
+  .page-header {
+    .shipment-title {
+      font-size: 1.25rem;
+    }
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .tabs-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+
+    .tab-btn {
+      padding: 0.75rem 1rem;
+      font-size: 0.8125rem;
+      white-space: nowrap;
+    }
+  }
+
+  .page-footer {
+    flex-direction: column;
+
+    ::ng-deep .p-button {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .form-field {
+    label {
+      font-size: 0.8125rem;
+    }
+
+    .form-input {
+      height: 2.5rem;
+      font-size: 0.8125rem;
+    }
+  }
+
+  ::ng-deep .form-dropdown,
+  ::ng-deep .form-calendar {
+    .p-dropdown,
+    .p-inputtext {
+      height: 2.5rem;
+      font-size: 0.8125rem;
+    }
+  }
+}

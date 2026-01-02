@@ -1,0 +1,48 @@
+.psa-bdp-button-primary {
+    background-color: var(--bdpPrimaryLightBlue) !important; // PrimeNG's blue
+    border: none;
+    color: var(--bdpButtonSecondary);
+    font-size: 1rem;
+    width: 180px;
+    height: 36px;
+    // padding: 0.8rem 1.2rem;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+ 
+    &:hover {
+        background-color: var(--bdpPrimaryLightBlue) !important;
+        color: var(--bdpButtonSecondary) !important;
+    }
+}
+ 
+.psa-bdp-button-secondary {
+    background-color: var(--bdpButtonSecondary) !important; // Light gray button
+    border: 1px solid var(--bdpFontPrimary);
+    color: var(--bdpFontPrimary) !important;
+    width: 180px;
+    height: 36px;
+    font-size: 1rem;
+    // padding: 0.7rem 1.2rem;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+ 
+    &:hover {
+        background-color: var(--bdpButtonSecondary) !important;
+        color: var(--bdpFontPrimary) !important;
+    }
+}
+ 
+.common-card-full-width{
+    width: 100%;
+    // max-width: 200px;
+}
+ 
+.widget-card-height{
+    height: 100%;
+    position: relative;
+}
+ 
+.header-font{
+    color: var(--bdpFontPrimary);
+    font-size: 1.4rem;
+}

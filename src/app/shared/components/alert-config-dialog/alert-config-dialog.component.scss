@@ -1,0 +1,612 @@
+::ng-deep .alert-config-dialog {
+  .p-dialog {
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .p-dialog-header {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #e5e7eb;
+    background-color: #ffffff;
+
+    .dialog-title {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #1f2937;
+    }
+
+    .p-dialog-header-icon {
+      width: 2rem;
+      height: 2rem;
+      color: #6b7280;
+
+      &:hover {
+        color: #374151;
+      }
+    }
+  }
+
+  .p-dialog-content {
+    padding: 2rem;
+    background-color: #ffffff;
+  }
+
+  .p-dialog-footer {
+    padding: 1.25rem 2rem;
+    border-top: 1px solid #e5e7eb;
+    background-color: #ffffff;
+  }
+}
+
+.dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+// Modal mask styling for opaque blackish background
+::ng-deep .p-dialog-mask {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  &.three-column {
+    flex-direction: row;
+    gap: 1.25rem;
+  }
+}
+
+.form-label {
+  font-size: 0.938rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.25rem;
+}
+
+.checkbox-group {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.checkbox-label {
+  font-size: 0.875rem;
+  color: #374151;
+  font-weight: 400;
+  cursor: pointer;
+  margin: 0;
+}
+
+.radio-group {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.radio-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.radio-item input[type='radio'] {
+  width: 1rem;
+  height: 1rem;
+}
+
+.radio-label {
+  font-size: 0.875rem;
+  color: #374151;
+  font-weight: 400;
+  cursor: pointer;
+  margin: 0;
+}
+
+
+.form-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+  }
+}
+
+.form-input {
+  width: 100%;
+  height: 2.75rem;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  color: #1f2937;
+  transition: all 0.2s ease;
+
+  &::placeholder {
+    color: #9ca3af;
+  }
+
+  &:hover {
+    border-color: #9ca3af;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+
+  &.readonly-input {
+    background-color: #f3f4f6;
+    color: #6b7280;
+    cursor: not-allowed;
+    border-color: #e5e7eb;
+
+    &:hover {
+      border-color: #e5e7eb;
+    }
+
+    &:focus {
+      border-color: #e5e7eb;
+      box-shadow: none;
+    }
+  }
+}
+
+.dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+// PrimeNG Component Overrides
+::ng-deep {
+  .alert-config-dialog {
+    .p-checkbox {
+      .p-checkbox-box {
+        width: 1.25rem;
+        height: 1.25rem;
+        border: 2px solid #d1d5db;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+
+        &.p-highlight {
+          background-color: #3b82f6;
+          border-color: #3b82f6;
+        }
+
+        &:hover {
+          border-color: #9ca3af;
+        }
+
+        .p-checkbox-icon {
+          font-size: 0.75rem;
+        }
+      }
+    }
+
+
+    .p-dropdown,
+    .shipment-multiselect {
+      width: 100%;
+      height: 2.75rem;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+
+      &:hover {
+        border-color: #9ca3af;
+      }
+
+      &.p-focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+
+      .p-dropdown-label,
+      .p-multiselect-label {
+        padding: 0.625rem 0.875rem;
+        font-size: 0.875rem;
+        color: #1f2937;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        &.p-placeholder {
+          color: #9ca3af;
+          justify-content: flex-start;
+        }
+      }
+
+      .p-dropdown-trigger,
+      .p-multiselect-trigger {
+        width: 2.5rem;
+        color: #6b7280;
+      }
+    }
+
+    .p-calendar {
+      width: 100%;
+
+      .p-inputtext {
+        width: 100%;
+        height: 2.75rem;
+        padding: 0.625rem 0.875rem;
+        padding-right: 2.5rem;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        font-size: 0.875rem;
+        color: #1f2937;
+        transition: all 0.2s ease;
+        text-align: left;
+
+        &::placeholder {
+          color: #9ca3af;
+        }
+
+        &:hover {
+          border-color: #9ca3af;
+        }
+
+        &:focus {
+          outline: none;
+          border-color: #3b82f6;
+          box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+      }
+
+      &.readonly-calendar {
+        .p-inputtext {
+          background-color: #f3f4f6;
+          color: #6b7280;
+          cursor: not-allowed;
+          border-color: #e5e7eb;
+
+          &:hover {
+            border-color: #e5e7eb;
+          }
+
+          &:focus {
+            border-color: #e5e7eb;
+            box-shadow: none;
+          }
+        }
+
+        .p-datepicker-trigger {
+          pointer-events: none;
+          opacity: 0.5;
+        }
+      }
+
+      .p-datepicker-trigger {
+        color: #6b7280;
+        right: 0.75rem;
+      }
+    }
+
+    .p-button {
+      height: 2.75rem;
+      padding: 0.625rem 1.5rem;
+      font-size: 0.938rem;
+      font-weight: 500;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+
+      &.cancel-btn {
+        background-color: #ffffff;
+        border: 1px solid #d1d5db;
+        color: #374151;
+
+        &:hover {
+          background-color: #f9fafb;
+          border-color: #9ca3af;
+        }
+      }
+
+      &.save-btn {
+        background-color: #3b82f6;
+        border: 1px solid #3b82f6;
+        color: #ffffff;
+
+        &:hover {
+          background-color: #2563eb;
+          border-color: #2563eb;
+        }
+      }
+    }
+  }
+
+  // MultiSelect Panel
+  .p-multiselect-panel {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.18);
+    background-color: #ffffff !important;
+    min-width: 250px;
+    z-index: 1100 !important;
+
+    .p-multiselect-header {
+      padding: 0.75rem;
+      border-bottom: 1px solid #e5e7eb;
+      background-color: #ffffff !important;
+
+      .p-multiselect-filter-container {
+        width: 100%;
+
+        .p-multiselect-filter {
+          width: 100%;
+          padding: 0.625rem 0.875rem;
+          padding-left: 2.5rem;
+          border: 1px solid #d1d5db;
+          border-radius: 6px;
+          font-size: 0.875rem;
+          background-color: #ffffff !important;
+
+          &::placeholder {
+            color: #9ca3af;
+          }
+
+          &:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+          }
+        }
+
+        .p-multiselect-filter-icon {
+          left: 0.875rem;
+          color: #9ca3af;
+        }
+      }
+
+      .p-checkbox {
+        display: none;
+      }
+    }
+
+    .p-multiselect-items-wrapper {
+      max-height: 300px;
+      background-color: #ffffff !important;
+    }
+
+    .p-multiselect-items {
+      padding: 0.5rem 0;
+      background-color: #ffffff !important;
+
+      .p-multiselect-item {
+        padding: 0.75rem 1rem;
+        font-size: 0.875rem;
+        color: #374151;
+        transition: background-color 0.15s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        border: none;
+        background-color: #ffffff !important;
+
+        &:hover {
+          background-color: #f9fafb;
+        }
+
+        &.p-highlight {
+          background-color: #ffffff !important;
+          color: #374151;
+
+          .p-checkbox-box {
+            background-color: #3b82f6;
+            border-color: #3b82f6;
+          }
+        }
+
+        .p-checkbox {
+          margin: 0;
+
+          .p-checkbox-box {
+            width: 1.125rem;
+            height: 1.125rem;
+            border: 2px solid #d1d5db;
+            border-radius: 4px;
+            background-color: #ffffff;
+            transition: all 0.2s ease;
+
+            &.p-highlight {
+              background-color: #3b82f6;
+              border-color: #3b82f6;
+            }
+
+            .p-checkbox-icon {
+              color: #ffffff;
+              font-size: 0.75rem;
+            }
+          }
+        }
+      }
+
+      .p-multiselect-empty-message {
+        padding: 1rem;
+        color: #9ca3af;
+        font-size: 0.875rem;
+        text-align: center;
+      }
+    }
+  }
+
+  // Dropdown Panel
+  .p-dropdown-panel {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.18);
+    background-color: #ffffff !important;
+    z-index: 1100 !important;
+
+    .p-dropdown-header {
+      padding: 0.75rem;
+      border-bottom: 1px solid #e5e7eb;
+      background-color: #ffffff !important;
+
+      .p-dropdown-filter-container {
+        width: 100%;
+
+        .p-dropdown-filter {
+          width: 100%;
+          padding: 0.625rem 0.875rem;
+          padding-left: 2.5rem;
+          border: 1px solid #d1d5db;
+          border-radius: 6px;
+          font-size: 0.875rem;
+          background-color: #ffffff !important;
+
+          &::placeholder {
+            color: #9ca3af;
+          }
+
+          &:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+          }
+        }
+
+        .p-dropdown-filter-icon {
+          left: 0.875rem;
+          color: #9ca3af;
+        }
+      }
+    }
+
+    .p-dropdown-items-wrapper {
+      max-height: 300px;
+      background-color: #ffffff !important;
+    }
+
+    .p-dropdown-items {
+      padding: 0.5rem 0;
+      background-color: #ffffff !important;
+
+      .p-dropdown-item {
+        padding: 0.75rem 1rem;
+        font-size: 0.875rem;
+        color: #374151;
+        transition: background-color 0.15s ease;
+        border: none;
+
+        &:hover {
+          background-color: #f9fafb;
+        }
+
+        &.p-highlight {
+          background-color: #f0f9ff;
+          color: #374151;
+        }
+
+        &:focus {
+          outline: none;
+          box-shadow: none;
+        }
+      }
+
+      .p-dropdown-empty-message {
+        padding: 1rem;
+        color: #9ca3af;
+        font-size: 0.875rem;
+        text-align: center;
+      }
+    }
+  }
+
+  // Fix for dropdown and multiselect placeholder and label alignment
+  .p-select-label,
+  .p-placeholder {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    padding-left: 10px !important;
+  }
+
+  /* Ensure any PrimeNG overlay container stays solid white */
+  .p-overlay {
+    background-color: #ffffff !important;
+    border-radius: 8px;
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.18);
+  }
+
+  .p-select-list-container {
+    background-color: #ffffff !important;
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.18);
+  }
+}
+
+.selected-item-text {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .more-count {
+    background-color: #e5e7eb;
+    color: #6b7280;
+    padding: 0.125rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+}
+
+// Responsive Design
+@media (max-width: 992px) {
+  ::ng-deep .alert-config-dialog {
+    .p-dialog {
+      width: 95vw !important;
+      max-width: 700px;
+    }
+  }
+
+  .form-row.three-column {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 576px) {
+  ::ng-deep .alert-config-dialog {
+    .p-dialog {
+      width: 95vw !important;
+      margin: 1rem;
+    }
+
+    .p-dialog-header,
+    .p-dialog-content,
+    .p-dialog-footer {
+      padding: 1rem;
+    }
+  }
+
+  .dialog-footer {
+    flex-direction: column;
+
+    .p-button {
+      width: 100%;
+    }
+  }
+
+  .checkbox-group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+}

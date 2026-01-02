@@ -1,0 +1,237 @@
+<p-dialog 
+  [(visible)]="visible" 
+  (onHide)="onHide()"
+  [modal]="true"
+  [closable]="true"
+  [draggable]="false"
+  [resizable]="false"
+  styleClass="alert-config-dialog"
+  [style]="{ width: '900px' }">
+  
+  <ng-template pTemplate="header">
+    <h3 class="dialog-title">Add Alert</h3>
+  </ng-template>
+
+  <div class="dialog-content">
+    <!-- Notification Type -->
+    <div class="form-row">
+      <label class="form-label">Please choose how to receive the notification</label>
+      <div class="checkbox-group">
+        <div class="checkbox-item">
+          <p-checkbox 
+            [(ngModel)]="emailChecked" 
+            [binary]="true" 
+            inputId="email-check">
+          </p-checkbox>
+          <label for="email-check" class="checkbox-label">Email</label>
+        </div>
+        <div class="checkbox-item">
+          <p-checkbox 
+            [(ngModel)]="notificationChecked" 
+            [binary]="true" 
+            inputId="notification-check">
+          </p-checkbox>
+          <label for="notification-check" class="checkbox-label">Notification</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 1: Email, Shipment No, Alert Name -->
+    <div class="form-row three-column">
+      <div class="form-field">
+        <label for="email">Email</label>
+        <input 
+          pInputText 
+          id="email" 
+          [(ngModel)]="email" 
+          placeholder="Enter email address"
+          class="form-input" />
+      </div>
+
+      <div class="form-field">
+        <label for="shipmentNo">Shipment No</label>
+        
+        <!-- Text field mode (for Arrival page) -->
+        <input 
+          *ngIf="useTextFieldForShipments"
+          pInputText 
+          id="shipmentNoText" 
+          [(ngModel)]="shipmentNosText" 
+          placeholder="Shipment numbers"
+          class="form-input" />
+        
+        <!-- Dropdown mode (for Alerts page) -->
+        <p-multiSelect 
+          *ngIf="!useTextFieldForShipments"
+          [(ngModel)]="shipmentNos"
+          [options]="shipmentOptions"
+          optionLabel="label"
+          placeholder="Select shipment(s)"
+          [showToggleAll]="false"
+          [filter]="true"
+          filterPlaceHolder="Search"
+          styleClass="shipment-multiselect">
+          <ng-template let-value pTemplate="selectedItems">
+            <div class="selected-item-text" *ngIf="value && value.length > 0">
+              {{ value[0].label }}
+              <span *ngIf="value.length > 1" class="more-count">+{{ value.length - 1 }} more</span>
+            </div>
+          </ng-template>
+        </p-multiSelect>
+      </div>
+
+      <div class="form-field">
+        <label for="alertName">Alert Name</label>
+        <input 
+          pInputText 
+          id="alertName" 
+          [(ngModel)]="alertName" 
+          placeholder="Enter alert name"
+          class="form-input" />
+      </div>
+    </div>
+
+    <!-- Row 2: Threshold Days, Hazardous Goods, Trigger -->
+    <div class="form-row three-column">
+      <div class="form-field">
+        <label for="thresholdDays">Threshold Days</label>
+        <input 
+          pInputText 
+          type="number"
+          id="thresholdDays" 
+          [(ngModel)]="thresholdDays" 
+          placeholder="Enter days"
+          class="form-input" />
+      </div>
+
+      <div class="form-field">
+        <label>Hazardous Goods ?</label>
+        <div class="radio-group">
+          <div class="radio-item">
+            <input 
+              type="radio"
+              id="hazardous-yes"
+              name="hazardousGoods"
+              [value]="'yes'"
+              [(ngModel)]="hazardousGoods" />
+            <label for="hazardous-yes" class="radio-label">Yes</label>
+          </div>
+          <div class="radio-item">
+            <input 
+              type="radio"
+              id="hazardous-no"
+              name="hazardousGoods"
+              [value]="'no'"
+              [(ngModel)]="hazardousGoods" />
+            <label for="hazardous-no" class="radio-label">No</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="trigger">Trigger</label>
+        <input 
+          pInputText 
+          id="trigger" 
+          [(ngModel)]="trigger" 
+          [readonly]="true"
+          class="form-input readonly-input" />
+      </div>
+    </div>
+
+    <!-- Row 3: Company Name, Carrier, Port of Departure -->
+    <div class="form-row three-column">
+      <div class="form-field">
+        <label for="companyName">Company Name</label>
+        <p-dropdown 
+          [(ngModel)]="companyName"
+          [options]="companyOptions"
+          optionLabel="label"
+          optionValue="value"
+          placeholder="Select company"
+          styleClass="form-dropdown">
+        </p-dropdown>
+      </div>
+
+      <div class="form-field">
+        <label for="carrier">Carrier</label>
+        <p-dropdown 
+          [(ngModel)]="carrier"
+          [options]="carrierOptions"
+          optionLabel="label"
+          optionValue="value"
+          placeholder="Select carrier"
+          styleClass="form-dropdown">
+        </p-dropdown>
+      </div>
+
+      <div class="form-field">
+        <label for="portOfDeparture">Port of Departure</label>
+        <p-dropdown 
+          [(ngModel)]="portOfDeparture"
+          [options]="portDepartureOptions"
+          optionLabel="label"
+          optionValue="value"
+          placeholder="Select port"
+          styleClass="form-dropdown">
+        </p-dropdown>
+      </div>
+    </div>
+
+    <!-- Row 4: Port of Arrival, Start Date, End Date -->
+    <div class="form-row three-column">
+      <div class="form-field">
+        <label for="portOfArrival">Port of Arrival</label>
+        <p-dropdown 
+          [(ngModel)]="portOfArrival"
+          [options]="portArrivalOptions"
+          optionLabel="label"
+          optionValue="value"
+          placeholder="Select port"
+          styleClass="form-dropdown">
+        </p-dropdown>
+      </div>
+
+      <div class="form-field">
+        <label for="startDate">Start Date</label>
+        <p-calendar 
+          [(ngModel)]="startDate"
+          [showIcon]="true"
+          [readonlyInput]="true"
+          [disabled]="true"
+          dateFormat="dd M yy"
+          placeholder="Select start date"
+          styleClass="form-calendar readonly-calendar"
+          inputId="startDate">
+        </p-calendar>
+      </div>
+
+      <div class="form-field">
+        <label for="endDate">End Date</label>
+        <p-calendar 
+          [(ngModel)]="endDate"
+          [showIcon]="true"
+          dateFormat="dd M yy"
+          placeholder="Select end date"
+          styleClass="form-calendar"
+          inputId="endDate">
+        </p-calendar>
+      </div>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="dialog-footer">
+      <p-button 
+        label="Cancel" 
+        (onClick)="onCancel()" 
+        styleClass="p-button-outlined cancel-btn">
+      </p-button>
+      <p-button 
+        label="Save" 
+        (onClick)="onSave()" 
+        styleClass="p-button-primary save-btn">
+      </p-button>
+    </div>
+  </ng-template>
+</p-dialog>

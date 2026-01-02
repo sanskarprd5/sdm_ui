@@ -1,0 +1,71 @@
+<p-dialog 
+  [(visible)]="visible"
+  [modal]="true"
+  [dismissableMask]="false"
+  [draggable]="false"
+  [resizable]="false"
+  [closable]="true"
+  styleClass="upload-dialog-wrapper">
+
+  <ng-template pTemplate="header">
+    <div class="dialog-header">Upload Document</div>
+  </ng-template>
+
+  <div class="upload-content">
+
+    <!-- Instructions Box -->
+    <div class="upload-instructions">
+      <span>1. <strong>Maximum File Size:</strong> {{ maxFileSize }} MB &nbsp;&nbsp; 2. <strong>File Type:</strong> {{ allowedFileTypes.join(', ') }} &nbsp;&nbsp; 3. Keep file name recognizeable</span>
+    </div>
+
+    <!-- Upload Area -->
+    <div 
+      class="upload-zone"
+      [class.drag-over]="dragOver"
+      (click)="triggerFileInput()"
+      (drop)="onDrop($event)"
+      (dragover)="onDragOver($event)"
+      (dragleave)="onDragLeave($event)">
+
+      <input 
+        type="file" 
+        id="fileInput" 
+        class="file-input" 
+        (change)="onFileSelect($event)"
+        [accept]="acceptFileTypes"
+        hidden>
+
+      <i class="pi pi-upload upload-icon"></i>
+      <div class="upload-text">Upload File</div>
+    </div>
+
+    <!-- Selected File Display -->
+    @if (selectedFile) {
+      <div class="selected-file-display">
+        <span class="file-name">{{ selectedFile.name }}</span>
+        <i class="pi pi-trash delete-icon" (click)="removeFile(); $event.stopPropagation()" title="Remove file"></i>
+      </div>
+    }
+
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="dialog-footer">
+      <button 
+        pButton 
+        type="button" 
+        label="Cancel" 
+        class="p-button-outlined cancel-btn"
+        (click)="onCancel()"></button>
+
+      <button 
+        pButton 
+        type="button" 
+        [label]="isUploading ? 'Uploading...' : 'Upload'" 
+        class="p-button upload-btn"
+        [disabled]="!selectedFile || isUploading"
+        (click)="onUpload()"></button>
+    </div>
+  </ng-template>
+
+</p-dialog>

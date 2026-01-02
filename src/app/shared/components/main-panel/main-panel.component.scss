@@ -1,0 +1,37 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.breadcrumb-filter-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.filter-button-container {
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.main-content {
+  flex: 1;
+  padding-bottom: 60px; // Space for fixed footer
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .main-content {
+    padding-bottom: 80px; // Increased space for footer on smaller screens
+  }
+}
+
+@media (max-width: 576px) {
+  .main-content {
+    padding-bottom: 100px; // More space on mobile if footer stacks
+  }
+}

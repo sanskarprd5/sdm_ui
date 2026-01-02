@@ -1,0 +1,366 @@
+.topbar {
+  background-color: var(--bdpMenuBackgroundTop) !important;
+}
+
+.topbar-container {
+  padding: 0.75rem 1.5rem;
+  max-width: 100%;
+  min-height: 60px;
+}
+
+.topbar-left {
+  min-width: 0;
+  flex-shrink: 1;
+  max-width: 50%;
+}
+
+.topbar-right {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.topbar-nav {
+  min-width: 0;
+}
+
+.topbar-actions {
+  min-width: 0;
+}
+
+.brand-logo {
+  max-height: 3.25rem;
+  width: auto;
+  max-width: min(30vw);
+  height: auto;
+  object-fit: contain;
+}
+
+
+.nav-pill {
+  background-color: var(--bdpMenuHover);
+  border: 1px solid var(--bdpMenuHover);
+  border-radius: 0.3rem;
+  padding: 0.35rem 0.75rem;
+  min-height: 2.25rem;
+  color: var(--bdpFontSecondary);
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+.nav-pill:hover {
+  opacity: 0.85;
+}
+
+.nav-logo,
+.analytics-logo {
+  max-height: 36.5px;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.notification-wrapper {
+  position: relative;
+}
+
+.notification-btn {
+  position: relative;
+  border: none;
+}
+
+.notify-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.notification-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background-color: var(--bdpDelay);
+  color: var(--bdpFontSecondary);
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.alerts-panel {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.75rem);
+  width: min(340px, calc(100vw - 2rem));
+  max-width: 340px;
+  background: var(--bdpButtonSecondary);
+  color: var(--bdpFontPrimary);
+  border-radius: 10px;
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.35);
+  padding: 1rem 1rem 0.25rem;
+  z-index: 20;
+}
+
+.panel-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.badge {
+  background-color: var(--psabdp-icon-background);
+  color: var(--bdpPrimaryLightBlue);
+  border-radius: 999px;
+  padding: 0.1rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+// .pill {
+//   border: none;
+//   background-color: var(--bdpFontPrimary);
+//   color: var(--bdpFontSecondary);
+//   border-radius: 999px;
+//   padding: 0.25rem 0.75rem;
+//   font-size: 0.75rem;
+//   cursor: pointer;
+// }
+
+.alerts-panel-tabs {
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 0.75rem;
+}
+
+.tab {
+  background: transparent;
+  border: none;
+  padding: 0.5rem 0;
+  font-weight: 600;
+  color: #6b7280;
+  cursor: pointer;
+  position: relative;
+}
+
+.tab.active {
+  color: var(--bdpPrimaryLightBlue);
+}
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 3px;
+  border-radius: 999px;
+  background-color: var(--bdpPrimaryLightBlue);
+}
+
+.alerts-list {
+  max-height: 360px;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.alerts-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.alerts-list::-webkit-scrollbar-thumb {
+  background-color: rgba(148, 163, 184, 0.7);
+  border-radius: 999px;
+}
+
+.alert-card {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem 0.25rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.alert-card:last-child {
+  border-bottom: none;
+}
+
+// .icon-circle {
+//   width: 36px;
+//   height: 36px;
+//   border-radius: 50%;
+//   background-color: var(--PSABDP-Colour-Upload-Background);
+//   color: var(--bdpEarly);
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   font-size: 0.85rem;
+//   flex-shrink: 0;
+// }
+
+.alert-details {
+  flex: 1;
+}
+
+.alert-status {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--bdpFontPrimary);
+}
+
+.alert-status-badge {
+  margin: 0.35rem 0;
+  font-size: 0.8rem;
+  color: var(--bdpEarly);
+}
+
+.alert-datetime {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin: 0.25rem 0;
+}
+
+.alert-meta {
+  font-size: 0.8rem;
+  color: var(--bdpFontPrimary);
+}
+
+.alert-meta span {
+  color: var(--bdpFontLight);
+  margin-right: 0.2rem;
+}
+
+.user-profile {
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  background-color: var(--bdpError);
+  color: var(--bdpFontSecondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+.user-name {
+  font-size: 0.95rem; 
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .topbar-container {
+    padding: 0.5rem 1rem;
+  }
+
+  .topbar-left {
+    max-width: 40%;
+  }
+
+  .brand-logo {
+    max-height: 2.5rem;
+    max-width: min(55vw);
+  }
+
+  .nav-logo,
+  .analytics-logo {
+    max-height: 35px;
+  }
+
+  .nav-pill {
+    padding: 0.25rem 0.5rem;
+    min-height: 2rem;
+  }
+
+  .alerts-panel {
+    width: min(320px, calc(100vw - 1rem));
+    right: -0.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .topbar-container {
+    padding: 0.5rem 0.75rem;
+    min-height: auto;
+  }
+
+  .topbar-left {
+    max-width: 45%;
+  }
+
+  .brand-logo {
+    max-height: 2rem;
+    max-width: min(50vw);
+  }
+
+  .nav-logo,
+  .analytics-logo {
+    max-height: 38px;
+  }
+
+  .nav-pill {
+    padding: 0.25rem 0.4rem;
+  }
+
+  .alerts-panel {
+    width: calc(100vw - 1rem);
+    max-width: none;
+    right: 0.5rem;
+    left: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar-container {
+    padding: 0.5rem;
+  }
+
+  .topbar-left {
+    max-width: 30%;
+  }
+
+  .brand-logo {
+    max-height: 1.75rem;
+    max-width: min(70vw);
+  }
+
+  .nav-logo,
+  .analytics-logo {
+    max-height: 20px;
+  }
+
+  .nav-pill {
+    padding: 0.2rem 0.3rem;
+  }
+}
+
+:host ::ng-deep .user-menu {
+  background-color: var(--bdpMenuHover) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  min-width: 14rem !important;
+}
+
+:host ::ng-deep .user-menu .p-menuitem-link {
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+:host ::ng-deep .user-menu .p-menuitem-icon,
+:host ::ng-deep .user-menu .p-menuitem-text {
+  color: var(--bdpFontSecondary);
+}
+
+:host ::ng-deep .user-menu .p-menuitem-link:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+

@@ -20,10 +20,10 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('digital-smart_sdm.ui');
   });
 
-  it('should render title', () => {
+  it('should render router outlet', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, digital-smart_sdm.ui');
+    expect(compiled.querySelector('router-outlet')).not.toBeNull();
   });
 });

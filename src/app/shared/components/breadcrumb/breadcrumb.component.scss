@@ -1,0 +1,53 @@
+.breadcrumb-container {
+  padding-top: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.breadcrumb-wrapper {
+  width: 100%;
+}
+
+.breadcrumb {
+  list-style: none;
+}
+
+.breadcrumb-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.breadcrumb-item {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.breadcrumb-link {
+  text-decoration: none;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+  cursor: pointer;
+
+}
+
+.breadcrumb-current {
+  font-weight: 500;
+}
+
+.breadcrumb-separator {
+  font-size: 0.625rem;
+}
+
+@media (max-width: 576px) {
+  .breadcrumb-container {
+    padding: 0.75rem 1rem;
+  }
+  
+  .breadcrumb-item {
+    font-size: 0.75rem;
+  }
+  
+  .breadcrumb-separator {
+    font-size: 0.5rem;
+  }
+}

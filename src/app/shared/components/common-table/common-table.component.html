@@ -1,0 +1,167 @@
+<div class="common-table-wrapper" style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); overflow: hidden;">
+<p-table
+  #dt
+  [value]="data"
+  [(selection)]="selectedItems"
+  [lazy]="lazy"
+  [loading]="loading"
+  [paginator]="paginator"
+  [first]="first"
+  [rows]="rows"
+  [rowsPerPageOptions]="rowsPerPageOptions"
+  [totalRecords]="totalRecords"
+  [showCurrentPageReport]="showCurrentPageReport"
+  [currentPageReportTemplate]="currentPageReportTemplate"
+  [selectionMode]="selectionMode"
+  [dataKey]="dataKey"
+  [globalFilterFields]="globalFilterFields"
+  (onPage)="onPageChange($event)"
+  (onRowSelect)="onRowSelect($event)"
+  (onRowUnselect)="onRowUnselect($event)"
+  (selectionChange)="onSelectionChange($event)"
+  (onSort)="onSort($event)"
+  (onFilter)="onFilter($event)"
+  styleClass="common-table">
+  
+  <!-- Caption / Header Actions -->
+  <ng-template pTemplate="caption">
+    @if (captionTemplate) {
+      <ng-container *ngTemplateOutlet="captionTemplate"></ng-container>
+    } @else {
+      <div class="flex justify-content-between align-items-center gap-3 flex-wrap" style="padding: 1.25rem 1.5rem; background-color: #ffffff;">
+        @if (showSearch) {
+          <div class="flex align-items-center" style="position: relative; width: 16rem;">
+            <i class="pi pi-search" style="position: absolute; left: 0.875rem; color: #9ca3af; font-size: 0.875rem; pointer-events: none;"></i>
+            <input
+              pInputText
+              type="text"
+              [(ngModel)]="searchTerm"
+              (keyup.enter)="onSearch(searchTerm)"
+              [placeholder]="searchPlaceholder"
+              style="width: 100%; height: 2.5rem; padding-left: 2.5rem; padding-right: 0.875rem; border: 1px solid #e5e7eb; border-radius: 6px; font-size: 0.875rem;" />
+          </div>
+        }
+        
+        @if (actions.length > 0) {
+          <div class="flex gap-3 align-items-center">
+            @for (action of actions; track $index) {
+              <p-button
+                [label]="action.label"
+                [icon]="action.icon"
+                [styleClass]="(action.styleClass || 'p-button-outlined') + ' table-action-btn'"
+                [disabled]="action.disabled"
+                [loading]="action.loading"
+                (onClick)="executeAction(action)">
+              </p-button>
+            }
+          </div>
+        }
+      </div>
+    }
+  </ng-template>
+
+  <!-- Table Header -->
+  <ng-template pTemplate="header">
+    @if (headerTemplate) {
+      <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
+    } @else {
+      <tr>
+        @if (selectionMode === 'multiple') {
+          <th style="width: 3rem; padding: 1rem 1.25rem;">
+            <p-tableHeaderCheckbox />
+          </th>
+        }
+        @for (col of columns; track col.field) {
+          <th [pSortableColumn]="col.sortable ? col.field : undefined" style="padding: 1rem 1.25rem; font-weight: 600; font-size: 0.875rem; white-space: nowrap;">
+            <div class="flex align-items-center justify-content-between gap-3">
+              <div class="flex align-items-center gap-1">
+                <span>{{ col.header }}</span>
+                @if (col.sortable) {
+                  <i class="fa-light fa-angles-up-down" style="font-size: 1rem; font-weight: 500; cursor: pointer; color: #6b7280; margin-left: 0.5rem;"></i>
+                }
+              </div>
+              @if (col.filter) {
+                @if (col.filterType === 'date') {
+                  <p-columnFilter 
+                    type="date" 
+                    [field]="col.field" 
+                    display="menu"
+                    [showApplyButton]="true"
+                    [showClearButton]="true"
+                    [hideOnClear]="true"
+                    styleClass="table-filter-icon">
+                    <ng-template pTemplate="filtericon">
+                      <i class="pi pi-filter"></i>
+                    </ng-template>
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                      <div class="p-fluid">
+                        <p-datepicker 
+                          [ngModel]="getDateFilterValue(col.field)"
+                          (ngModelChange)="onDateFilterChange(col.field, $event)"
+                          dateFormat="yy-mm-dd"
+                          class="w-full">
+                        </p-datepicker>
+                      </div>
+                    </ng-template>
+                  </p-columnFilter>
+                } @else {
+                  <p-columnFilter 
+                    [type]="col.filterType || 'text'" 
+                    [field]="col.field" 
+                    display="menu"
+                    [matchMode]="col.filterMatchMode || 'startsWith'"
+                    [showMatchModes]="true"
+                    [showOperator]="false"
+                    [showAddButton]="false"
+                    [hideOnClear]="true"
+                    styleClass="table-filter-icon">
+                    <ng-template pTemplate="filtericon">
+                     <i class="fa-regular fa-filter" style="font-size: 1rem; font-weight: 500; cursor: pointer; color: #6b7280"></i>
+                    </ng-template>
+                  </p-columnFilter>
+                }
+              }
+            </div>
+          </th>
+        }
+      </tr>
+    }
+  </ng-template>
+
+  <!-- Table Body -->
+  <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+    @if (bodyTemplate) {
+      <tr>
+        @if (selectionMode === 'multiple') {
+          <td style="padding: 1rem 1.25rem;">
+            <p-tableCheckbox [value]="rowData" />
+          </td>
+        }
+        <ng-container *ngTemplateOutlet="bodyTemplate; context: { $implicit: rowData, rowIndex: rowIndex }"></ng-container>
+      </tr>
+    } @else {
+      <tr>
+        @if (selectionMode === 'multiple') {
+          <td style="padding: 1rem 1.25rem;">
+            <p-tableCheckbox [value]="rowData" />
+          </td>
+        }
+        @for (col of columns; track col.field) {
+          <td style="padding: 1rem 1.25rem; font-size: 0.875rem; color: #1f2937; white-space: nowrap;">
+            {{ rowData[col.field] }}
+          </td>
+        }
+      </tr>
+    }
+  </ng-template>
+
+  <!-- Empty Message -->
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td [attr.colspan]="columns.length + (selectionMode === 'multiple' ? 1 : 0)" class="text-center" style="padding: 2rem; color: #6b7280;">
+        {{ emptyMessage }}
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+</div>

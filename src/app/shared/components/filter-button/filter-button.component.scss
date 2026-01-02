@@ -1,0 +1,41 @@
+::ng-deep {
+  .filter-toggle-btn {
+    width: 10rem;
+    height: 2.5rem;
+    background-color: #ffffff !important;
+    border: 1px solid #000000 !important;
+    margin-top: 1.5rem;
+    border-radius: 4px !important;
+    color: #374151;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    gap: 0.5rem;
+    padding: 0.2rem;
+
+    .p-button-label {
+      font-weight: 500;
+    }
+
+    .p-button-icon {
+      font-size: 0.875rem;
+      margin-right: 0.5rem;
+    }
+
+    &:hover {
+      background-color: #f9fafb !important;
+      border-color: #000000;
+    }
+
+    &.active {
+      background-color: #2563eb;
+      border-color: #2563eb;
+      color: #ffffff;
+
+      .p-button-label,
+      .p-button-icon {
+        color: #ffffff;
+      }
+    }
+  }
+}

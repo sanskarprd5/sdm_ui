@@ -1,0 +1,18 @@
+<div class="kpi-widgets-container flex gap-3">
+  @for (kpi of kpiCards; track kpi.label; let i = $index) {
+    <div class="kpi-card" 
+         (click)="setActiveCard(i)"
+         [class.active-card]="isCardActive(i)">
+      <div class="kpi-content flex flex-column">
+        <div class="kpi-header flex flex-row justify-content-between align-items-center">
+          <h2 class="kpi-count">{{ kpi.count }}</h2>
+          <div class="kpi-icon-wrapper" 
+               [style.background-color]="isCardActive(i) ? 'rgba(255, 255, 255, 0.3)' : kpi.iconColor">
+            <i [class]="kpi.icon" class="kpi-icon"></i>
+          </div>
+        </div>
+        <p class="kpi-label">{{ kpi.label }}</p>
+      </div>
+    </div>
+  }
+</div>

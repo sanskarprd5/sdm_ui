@@ -1,0 +1,169 @@
+:host {
+  display: block;
+}
+
+.menubar {
+  background-color: var(--bdpMenuBackground);
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5rem;
+  border-top: 1px solid rgba(246, 243, 243, 0.1);
+
+}
+
+.menubar-container {
+  min-width: max-content;
+}
+
+.hamburger-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--bdpFontSecondary);
+  font-size: 1.5rem;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.menu-overlay {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  
+  &.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.menu-item {
+  color: var(--bdpFontSecondary);
+  text-decoration: none;
+  border-radius: 5px !important;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--bdpMenuHover);
+  }
+
+  &.active {
+    background-color: var(--bdpMenuHover);
+    font-weight: 600;
+  }
+}
+
+.dropdown-icon {
+  font-size: 0.7rem;
+  margin-left: 0.25rem;
+}
+
+.menu-item-dropdown {
+  .dropdown-icon {
+    font-size: 0.7rem;
+    margin-left: 0.25rem;
+  }
+}
+
+/* Master Data Dropdown Menu Styling */
+::ng-deep .master-data-menu,
+::ng-deep .alerts-menu {
+  background-color: #3d5164 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  min-width: 16rem !important;
+  
+  .p-menu-list {
+      padding: 0.5rem 0;
+      color: #ffffff;
+      padding: 0.875rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      transition: background-color 0.2s ease;
+      border-radius: 0;
+
+      .p-menuitem-icon {
+        color: #ffffff;
+        font-size: 1rem;
+        margin-right: 20px;
+      }
+
+       &:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+        
+        .p-menuitem-icon,
+        .p-menuitem-text {
+          color: #ffffff;
+        }
+      }
+
+      &:focus {
+        box-shadow: none;
+      }
+  }
+
+  .p-menu-item-label {
+      margin-left: 15px;
+      font-size: 1rem;
+      font-weight: 400;
+      color: #f1f1f1;
+  }
+  
+
+  &.p-menu {
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+}
+
+@media (max-width: 576px) {
+  .hamburger-toggle {
+    display: block;
+  }
+  
+  .menu-overlay {
+    display: block;
+  }
+  
+  .menubar-container {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    bottom: 0;
+    width: 280px;
+    max-width: 80vw;
+    background-color: var(--bdpMenuBackground);
+    padding: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    overflow-y: auto;
+    z-index: 999;
+    transition: left 0.3s ease;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+    
+    &.open {
+      left: 0;
+    }
+  }
+  
+  .menu-item {
+    width: 100%;
+    
+    &:hover {
+      background-color: var(--bdpMenuHover);
+    }
+  }
+  
+  .dropdown-icon {
+    margin-left: auto;
+  }
+}

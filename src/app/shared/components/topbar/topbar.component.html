@@ -1,0 +1,102 @@
+<header class="topbar surface-900 text-white shadow-2 w-full">
+  <div class="topbar-container flex flex-wrap align-items-center justify-content-between w-full gap-2 sm:gap-3">
+    <div class="topbar-left flex align-items-center flex-shrink-0">
+      <img class="brand-logo" src="../../../../assets/images/SDM_logo.png" alt="Smart Destination Management" />
+    </div>
+
+    <div class="topbar-right flex flex-wrap align-items-center gap-2 sm:gap-3 flex-grow-1 justify-content-end">
+      <nav class="topbar-nav flex flex-wrap align-items-center gap-2">
+        <a href="#" class="nav-pill flex align-items-center justify-content-center flex-shrink-0">
+          <img class="nav-logo" src="../../../../assets/images/Smart_Navigator_Logo.png" alt="Smart Navigator" />
+        </a>
+        <a href="#" class="nav-pill flex align-items-center justify-content-center flex-shrink-0">
+          <img class="analytics-logo" src="../../../../assets/images/Smart_Analytics_logo.png" alt="Smart Analytics" />
+        </a>
+      </nav>
+
+      <div class="topbar-actions flex flex-wrap align-items-center gap-2 sm:gap-3 flex-shrink-0">
+        <div class="notification-wrapper flex align-items-center">
+          <p-button
+            [text]="true"
+            [rounded]="true"
+            severity="secondary"
+            styleClass="notification-btn surface-800"
+            aria-label="Notifications"
+            (click)="toggleAlertsPanel($event)">
+            <img
+              src="../../../../assets/images/notifications.svg"
+              tooltipPosition="bottom"
+              alt="Notifications"
+              class="notify-icon" />
+            <span class="notification-badge" *ngIf="unreadCount > 0">{{ unreadCount }}</span>
+          </p-button>
+
+          <div class="alerts-panel" *ngIf="alertsPanelVisible">
+            <div class="alerts-panel-header flex justify-content-between align-items-center">
+              <div class="header-left flex align-items-center gap-2">
+                <span class="panel-title">Alerts</span>
+                <span class="badge" *ngIf="unreadCount > 0">{{ unreadCount }}</span>
+                <button class="pill" *ngIf="unreadCount > 0">Unread</button>
+              </div>
+            </div>
+
+            <div class="alerts-panel-tabs flex gap-2">
+              <button class="tab active">Shipment Alert</button>
+            </div>
+
+            <div class="alerts-list">
+              <div class="alert-card" *ngFor="let alert of shipmentAlerts">
+                <div class="icon-circle">
+                  <i class="pi pi-bell"></i>
+                </div>
+                <div class="alert-details">
+                  <div class="alert-status">{{ alert.name }}</div>
+                  <div class="alert-status-badge" *ngIf="alert.status">
+                    <h5>Status: {{ alert.status }}</h5>
+                  </div>
+                  <div class="alert-datetime" *ngIf="alert.lastTriggeredDate">
+                    Last triggered: {{ alert.lastTriggeredDate }}
+                  </div>
+                  <div class="alert-datetime" *ngIf="!alert.lastTriggeredDate">
+                    Not triggered yet
+                  </div>
+                  <div class="alert-meta">
+                    <span>Module:</span> {{ alert.module }}
+                  </div>
+                  <div class="alert-meta">
+                    <span>Shipments:</span>
+                    <span>{{ alert.shipmentNumbers.join(', ') }}</span>
+                  </div>
+                </div>
+                <button class="card-menu" aria-label="More options">
+                  <i class="pi pi-ellipsis-v"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="user-profile-wrapper flex align-items-center flex-shrink-0">
+          <div class="user-profile flex align-items-center gap-2" (click)="toggleMenu($event)">
+            <p-button [text]="true" [rounded]="true" severity="secondary" styleClass="surface-800">
+              <p-avatar
+                [label]="userInitials"
+                styleClass="user-avatar text-sm"
+                shape="circle" />
+            </p-button>
+            <span class="user-name hidden sm:inline">{{ username }}</span>
+            <i class="pi pi-chevron-down hidden sm:inline"></i>
+          </div>
+
+          <p-menu
+            #menu
+            [model]="userMenuItems"
+            [popup]="true"
+            [appendTo]="'body'"
+            styleClass="user-menu"
+            [style]="{ alignItems: 'center', color: 'white' }"></p-menu>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

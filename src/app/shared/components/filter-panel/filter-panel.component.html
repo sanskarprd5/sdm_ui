@@ -1,0 +1,121 @@
+<!-- Overlay -->
+@if (visible) {
+  <div class="filter-overlay" (click)="close()"></div>
+  
+  <!-- Side Panel -->
+  <div class="filter-panel" [class.visible]="visible">
+    <!-- Header -->
+    <div class="filter-header">
+      <h2 class="filter-title">Filters</h2>
+      <div class="filter-header-actions">
+        <button 
+          type="button"
+          class="clear-filters-btn"
+          (click)="clearFilters()">
+          Clear Filters
+        </button>
+        <button 
+          pButton
+          label="Apply"
+          class="apply-btn"
+          (click)="applyFilters()">
+        </button>
+        <button 
+          type="button"
+          class="close-btn"
+          (click)="close()">
+          <i class="pi pi-times"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="divider"></div>
+
+    <!-- Save Filter Section -->
+    <div class="save-filter-section">
+      <button 
+        pButton
+        label="Save Current Filter Criteria"
+        variant="outlined"
+        class="save-filter-btn"
+        (click)="saveFilterCriteria()">
+      </button>
+      <button 
+        type="button"
+        class="settings-btn"
+        (click)="openSettings()">
+        <i class="pi pi-cog"></i>
+      </button>
+    </div>
+
+    <!-- Saved Filter List -->
+    <div class="saved-filter-section">
+      <label class="section-label">Saved Filter List</label>
+      <div class="search-input-wrapper">
+        <input 
+          pInputText
+          type="text"
+          [(ngModel)]="savedFilterSearch"
+          placeholder="Search saved filters"
+          class="search-input" />
+        <i class="pi pi-search search-icon"></i>
+      </div>
+    </div>
+
+    <!-- Filter Fields -->
+    <div class="filter-fields">
+      <!-- Company -->
+      <div class="filter-field">
+        <label class="field-label">Company</label>
+        <p-dropdown
+          [(ngModel)]="selectedCompany"
+          [options]="companyOptions"
+          optionLabel="label"
+          placeholder="Select"
+          [style]="{'width': '100%'}"
+          styleClass="filter-dropdown">
+        </p-dropdown>
+      </div>
+
+      <!-- Origin Port -->
+      <div class="filter-field">
+        <label class="field-label">Origin Port</label>
+        <p-dropdown
+          [(ngModel)]="selectedOriginPort"
+          [options]="originPortOptions"
+          optionLabel="label"
+          placeholder="Select"
+          [style]="{'width': '100%'}"
+          styleClass="filter-dropdown">
+        </p-dropdown>
+      </div>
+
+      <!-- Destination Port -->
+      <div class="filter-field">
+        <label class="field-label">Destination Port</label>
+        <p-dropdown
+          [(ngModel)]="selectedDestinationPort"
+          [options]="destinationPortOptions"
+          optionLabel="label"
+          placeholder="Select"
+          [style]="{'width': '100%'}"
+          styleClass="filter-dropdown">
+        </p-dropdown>
+      </div>
+
+      <!-- Carrier -->
+      <div class="filter-field">
+        <label class="field-label">Carrier</label>
+        <p-dropdown
+          [(ngModel)]="selectedCarrier"
+          [options]="carrierOptions"
+          optionLabel="label"
+          placeholder="Select"
+          [style]="{'width': '100%'}"
+          styleClass="filter-dropdown">
+        </p-dropdown>
+      </div>
+    </div>
+  </div>
+}

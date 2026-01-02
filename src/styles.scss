@@ -1,1 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+$gutter: 1rem; //for primeflex grid system
+@import "primeicons/primeicons.css";
+@import "@fortawesome/fontawesome-pro/css/all.css";
+@import url("https://fonts.googleapis.com/css?family=Montserrat:500,600,700");
+@import "../node_modules/primeflex/primeflex.scss";
+@import "./assets/sass/variables/psa-bdp/_color_pallette_bdp.scss";
+@import "./assets/sass/variables/psa-bdp/_psa_bdp_common.scss";
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+    height: 98%;
+    font-family: "Montserrat", sans-serif !important;
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) transparent;
+    margin: 0;
+    padding: 0;
+    background-color:  #e9f1f8 !important;
+    //overflow-x: hidden;
+}
